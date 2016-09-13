@@ -28,7 +28,7 @@ public class JuliaSet extends JPanel {
 
 	// Adjusts the screen to the coordinates (moveX, moveY)
 	// to focus on a certain portion of the Julia Set
-	private static double moveX = 0, moveY = 0;
+	private static double moveX, moveY;
 
 	// Magnification factor into a certain portion of the Julia Set
 	private static double zoom = 1;
@@ -43,13 +43,14 @@ public class JuliaSet extends JPanel {
 	public JuliaSet() {
 
 		/* ADJUSTABLE VALUES */
-		
-		// JFrame Dimensions
+
 		this.width = 1000;
 		this.height = 1000;
 
-		this.cRe = -0.7; // Real Value
-		this.cIm = 0.27015; // Real Coefficient for Imaginary Value
+		// Real Value
+		this.cRe = -0.7;
+		// Real Coefficient for Imaginary Value
+		this.cIm = 0.27015;
 
 		this.moveX = 0;
 		this.moveY = 0;
@@ -86,20 +87,24 @@ public class JuliaSet extends JPanel {
 		// Current iteration of f(x, y)
 		int iter;
 		
-		double nRe, nIm, oRe, oIm, rad;
+		// New and old complex numbers
+		double nRe, nIm, oRe, oIm;
+		
+		// Radius of disk to check within for Basin of Attraction
+		double rad;
 
 		for (int i = 0; i < h; i++) {
 			for (int j = 0; j < w; j++) {
 
-		double numRe = 1.5 * j - 0.75 * w;
-		double denomRe = (zoom * w) / 2;
+				double numRe = 1.5 * j - 0.75 * w;
+				double denomRe = (zoom * w) / 2;
 	
-		nRe = moveX + (numRe / denomRe);
+				nRe = moveX + (numRe / denomRe);
 		
-		double numIm = (2 * i - h) / 2;
-		double denomIm = (zoom * h) / 2;
+				double numIm = (2 * i - h) / 2;
+				double denomIm = (zoom * h) / 2;
 		
-		nIm = moveY + (numIm / denomIm);
+				nIm = moveY + (numIm / denomIm);
 
 				for (iter = 0; iter < maxIterations; iter++) {
 					
