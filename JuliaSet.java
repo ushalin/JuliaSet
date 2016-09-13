@@ -86,13 +86,20 @@ public class JuliaSet extends JPanel {
 		// Current iteration of f(x, y)
 		int iter;
 		
-		double nRe, nIm, oRe, oIm;
+		double nRe, nIm, oRe, oIm, rad;
 
 		for (int i = 0; i < h; i++) {
 			for (int j = 0; j < w; j++) {
 
-				nRe = moveX + ((1.5 * (j - w / 2)) / (0.5 * zoom * w));
-				nIm = moveY + ((i - h / 2) / (0.5 * zoom * h));
+		double numRe = 1.5 * j - 0.75 * w;
+		double denomRe = (zoom * w) / 2;
+	
+		nRe = moveX + (numRe / denomRe);
+		
+		double numIm = (2 * i - h) / 2;
+		double denomIm = (zoom * h) / 2;
+		
+		nIm = moveY + (numIm / denomIm);
 
 				for (iter = 0; iter < maxIterations; iter++) {
 					
@@ -102,9 +109,9 @@ public class JuliaSet extends JPanel {
 					nRe = oRe * oRe - oIm * oIm + cRe;
 					nIm = 2 * oRe * oIm + cIm;
 					
-					double deter = nRe * nRe + nIm * nIm;
+					rad = nRe * nRe + nIm * nIm;
 					
-					if (deter > 4) {
+					if (rad > 4) {
 						break;
 					}
 				}
